@@ -1,0 +1,37 @@
+version: '3.5'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.53.4
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  # Конфиг Prometheus
+      - ./prometheus/data:/prometheus  # Volume для хранения данных
+    ports:
+      - 9090:9090
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - monitoring_net
+
+  grafana:
+    image: grafana/grafana:12.0.1
+    container_name: grafana
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+    volumes:
+      - ./grafana/lib:/var/lib/grafana  # Volume для хранения данных Grafana
+      - ./grafana-provisioning:/etc/grafana/provisioning  # Автоматическая настройка (опционально)
+      - ./grafana/etc:/etc/grafana
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring_net
+
+
+networks:
+  monitoring_net:
+    driver: bridge
