@@ -13,8 +13,10 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
-    networks:
-      - monitoring_net
+      - '--storage.tsdb.retention.time=31d'
+#    networks:
+#      - monitoring_net
+    user: root
 
   grafana:
     image: grafana/grafana:12.0.1
@@ -24,14 +26,13 @@ services:
       - prometheus
     volumes:
       - ./grafana/lib:/var/lib/grafana  # Volume для хранения данных Grafana
-      - ./grafana/provisioning:/etc/grafana/provisioning  # Автоматическая настройка (опционально)
       - ./grafana/etc:/etc/grafana
     ports:
-      - 3000:3000
-    networks:
-      - monitoring_net
+      - 8582:3000
+#    networks:
+#      - monitoring_net
+    user: root
 
-
-networks:
-  monitoring_net:
-    driver: bridge
+#networks:
+#  monitoring_net:
+#    driver: bridge
