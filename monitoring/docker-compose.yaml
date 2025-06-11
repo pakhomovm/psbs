@@ -24,7 +24,7 @@ services:
       - prometheus
     volumes:
       - ./grafana/lib:/var/lib/grafana  # Volume для хранения данных Grafana
-      - ./grafana-provisioning:/etc/grafana/provisioning  # Автоматическая настройка (опционально)
+      - ./grafana/provisioning:/etc/grafana/provisioning  # Автоматическая настройка (опционально)
       - ./grafana/etc:/etc/grafana
     ports:
       - 3000:3000
