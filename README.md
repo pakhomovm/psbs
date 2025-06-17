@@ -20,17 +20,17 @@ tar xvf node_exporter-*.linux-amd64.tar.gz
 
 ### 3. Move the Binary
 ```bash
-sudo mv node_exporter-*.linux-amd64/node_exporter /usr/local/bin/
+mv node_exporter-*.linux-amd64/node_exporter /usr/local/bin/
 ```
 
 ### 4. Create a System User
 ```bash
-sudo useradd -rs /bin/false node_exporter
+useradd -rs /bin/false node_exporter
 ```
 
 ### 5. Create a Systemd Service File
 ```bash
-sudo nano /etc/systemd/system/node_exporter.service
+touch /etc/systemd/system/node_exporter.service && vi /etc/systemd/system/node_exporter.service 
 ```
 
 Add this content:
@@ -55,8 +55,10 @@ WantedBy=multi-user.target
 
 ### 6. Start and Enable the Service
 ```bash
-sudo systemctl daemon-reload
-sudo systemctl start node_exporter
-sudo systemctl enable node_exporter
+systemctl daemon-reload && systemctl start node_exporter && systemctl enable node_exporter
 ```
 
+### 7. Check
+```bash
+curl http://localhost:9100/metrics
+```
