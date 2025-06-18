@@ -1,85 +1,170 @@
 apiVersion: 1
+
 groups:
-    - orgId: 1
-      name: group_1m
-      folder: TestFolder
-      interval: 1m
-      rules:
-        - uid: random_walk_threshold_uid 
-          title: random_walk_threshold
-          condition: C
-          data:
-            - refId: A
-              relativeTimeRange:
-                from: 300
-                to: 0
-              datasourceUid: testdata_uid
-              model:
-                datasource:
-                    type: grafana-testdata-datasource
-                    uid: testdata_uid
-                intervalMs: 1000
-                maxDataPoints: 43200
-                refId: A
-                scenarioId: random_walk
-            - refId: B
-              datasourceUid: __expr__
-              model:
-                conditions:
-                    - evaluator:
-                        params: []
-                        type: gt
-                      operator:
-                        type: and
-                      query:
-                        params:
-                            - B
-                      reducer:
-                        params: []
-                        type: last
-                      type: query
-                datasource:
-                    type: __expr__
-                    uid: __expr__
-                expression: A
-                intervalMs: 1000
-                maxDataPoints: 43200
-                reducer: mean
-                refId: B
-                type: reduce
-            - refId: C
-              datasourceUid: __expr__
-              model:
-                conditions:
-                    - evaluator:
-                        params:
-                            - 0
-                        type: gt
-                      operator:
-                        type: and
-                      query:
-                        params:
-                            - C
-                      reducer:
-                        params: []
-                        type: last
-                      type: query
-                datasource:
-                    type: __expr__
-                    uid: __expr__
-                expression: B
-                intervalMs: 1000
-                maxDataPoints: 43200
-                refId: C
-                type: threshold
-          dashboardUid: random-walk
-          panelId: 1
-          noDataState: NoData
-          execErrState: Error
-          for: 0s
-          annotations:
-            __dashboardUid__: random-walk
-            __panelId__: "1"
-          labels:
-            monitor: testdata
-          isPaused: false
+
+  - orgId: 1
+    name: OS_Rules 
+    folder: NodeExporter 
+    interval: 1m
+    rules:
+      - uid: alert_hdd_usage_warn_uid
+        title: HDD Usage Warning (>80%)
+        condition: A
+        noDataState: NoData
+        execErrState: Error
+        for: 5m
+        annotations:
+          summary: "High HDD usage detected (warning)"
+          description: "HDD usage is above 80% for 5 minutes"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "152"
+        labels:
+          severity: "warning"
+          team: "admins"
+        isPaused: false
+        notification_settings:
+          receiver: grafana-default-email
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: datasource_prometheus_uid 
+            model:
+              expr: ((node_filesystem_size_bytes(device!~"rootfs") - node_filesystem_avail_bytes(device!~"rootfs")) / node_filesystem_size_bytes(device!~"rootfs")) * 100 > 80
+              intervalMs: 1000 
+              maxbataPoints: 43200 
+              refId: A
+
+      - uid: alert_hdd_usage_crit_uid
+        title: HDD Usage Critical (>95%)
+        condition: A
+        noDataState: NoData
+        execErrState: Error
+        for: 5m
+        annotations:
+          summary: "High HDD usage detected (critical)"
+          description: "HDD usage is above 95% for 5 minutes"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "152"
+        labels:
+          severity: "critical"
+          team: "admins"
+        isPaused: false
+        notification_settings:
+          receiver: grafana-default-email
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: datasource_prometheus_uid 
+            model:
+              expr: ((node_filesystem_size_bytes(device!~"rootfs") - node_filesystem_avail_bytes(device!~"rootfs")) / node_filesystem_size_bytes(device!~"rootfs")) * 100 > 95
+              intervalMs: 1000 
+              maxbataPoints: 43200 
+              refId: A
+
+      - uid: alert_cpu_usage_warn_uid
+        title: CPU Usage Warning (>70%)
+        condition: "A"
+        no_data_state: "NoData"
+        exec_err_state: "Alerting"
+        for: "5m"
+        annotations:
+          summary: "High CPU usage detected (warning)"
+          description: "CPU usage is above 70% for 5 minutes"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "77"
+        labels:
+          severity: "warning"
+          team: "admins"
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: datasource_prometheus_uid 
+            model:
+              expr: "100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m])) * 100 > 70"
+              intervalMs: 10000
+              maxDataPoints: 43200
+              refId: "A"
+
+      - uid: alert_cpu_usage_crit_uid
+        title: CPU Usage Critical (>85%)
+        condition: "A"
+        no_data_state: "NoData"
+        exec_err_state: "Alerting"
+        for: "5m"
+        annotations:
+          summary: "High CPU usage detected (critical)"
+          description: "CPU usage is above 85% for 5 minutes"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "77"
+        labels:
+          severity: "critical"
+          team: "admins"
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: datasource_prometheus_uid 
+            model:
+              expr: "100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m])) * 100 > 85"
+              intervalMs: 10000
+              maxDataPoints: 43200
+              refId: "A"
+
+      - uid: alert_ram_usage_warn_uid
+        title: RAM Usage Warning (>80%)
+        condition: "A"
+        no_data_state: "NoData"
+        exec_err_state: "Alerting"
+        for: "5m"
+        annotations:
+          summary: "High RAM usage detected (warning)"
+          description: "RAM usage is above 80% for 5 minutes"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "78"
+        labels:
+          severity: "warning"
+          team: "admins"
+        data:
+          - refId: "A"
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: datasource_prometheus_uid
+            model:
+              expr: "(node_memory_MemTotal_bytes - node_memory_MemFree_bytes - node_memory_Buffers_bytes - node_memory_Cached_bytes) / node_memory_MemTotal_bytes * 100 > 80"
+              intervalMs: 10000
+              maxDataPoints: 43200
+              refId: "A"
+
+      - uid: alert_ram_usage_crit_uid
+        title: RAM Usage Critical (>95%)
+        condition: "A"
+        no_data_state: "NoData"
+        exec_err_state: "Alerting"
+        for: "5m"
+        annotations:
+          summary: "High RAM usage detected (critical)"
+          description: "RAM usage is above 95% for 5 minutes"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "78"
+        labels:
+          severity: "critical"
+          team: "admins"
+        data:
+          - refId: "A"
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: datasource_prometheus_uid
+            model:
+              expr: "(node_memory_MemTotal_bytes - node_memory_MemFree_bytes - node_memory_Buffers_bytes - node_memory_Cached_bytes) / node_memory_MemTotal_bytes * 100 > 95"
+              intervalMs: 10000
+              maxDataPoints: 43200
+              refId: "A"

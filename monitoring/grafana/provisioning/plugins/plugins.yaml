@@ -1,0 +1,20 @@
+apiVersion: 1
+
+apps:
+  # Плагин типа "app" (Zabbix)
+  - type: app
+    name: alexanderzobnin-zabbix-app
+    version: "5.1.0"
+    url: "file:///etc/grafana/provisioning/plugins/src/alexanderzobnin-zabbix-app-5.1.0.linux_amd64.zip"  # Путь внутри контейнера
+
+  # Плагин типа "panel" (Statusmap)
+  - type: panel
+    name: flant-statusmap-panel
+    version: "0.5.1"
+    url: "file:///etc/grafana/provisioning/plugins/src/flant-statusmap-panel-0.5.1.zip"
+
+  # Плагин типа "panel" (Vonage Status)
+  - type: panel
+    name: vonage-status-panel
+    version: "2.0.4"
+    url: "file:///etc/grafana/provisioning/plugins/src/vonage-status-panel-2.0.4.zip"
