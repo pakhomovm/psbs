@@ -23,7 +23,7 @@ groups:
           team: "admins"
         isPaused: false
         notification_settings:
-          receiver: grafana-default-email
+          receiver: Default PSBS alerting email
         data:
           - refId: A
             relativeTimeRange:
@@ -52,7 +52,7 @@ groups:
           team: "admins"
         isPaused: false
         notification_settings:
-          receiver: grafana-default-email
+          receiver: Default PSBS alerting email
         data:
           - refId: A
             relativeTimeRange:
@@ -79,6 +79,9 @@ groups:
         labels:
           severity: "warning"
           team: "admins"
+        isPaused: false
+        notification_settings:
+          receiver: Default PSBS alerting email
         data:
           - refId: A
             relativeTimeRange:
@@ -105,6 +108,9 @@ groups:
         labels:
           severity: "critical"
           team: "admins"
+        isPaused: false
+        notification_settings:
+          receiver: Default PSBS alerting email
         data:
           - refId: A
             relativeTimeRange:
@@ -131,6 +137,9 @@ groups:
         labels:
           severity: "warning"
           team: "admins"
+        isPaused: false
+        notification_settings:
+          receiver: Default PSBS alerting email
         data:
           - refId: "A"
             relativeTimeRange:
@@ -157,6 +166,9 @@ groups:
         labels:
           severity: "critical"
           team: "admins"
+        isPaused: false
+        notification_settings:
+          receiver: Default PSBS alerting email
         data:
           - refId: "A"
             relativeTimeRange:

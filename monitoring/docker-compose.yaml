@@ -40,7 +40,6 @@ services:
 #      - GF_SECURITY_ADMIN_PASSWORD=admin
 #      - GF_AUTH_ANONYMOUS_ENABLED=true
 #      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-
     ports:
       - 8582:3000
 #    networks:
