@@ -4,8 +4,9 @@ groups:
 
   - orgId: 1
     name: OS_Rules 
-    folder: NodeExporter 
+#    folder: NodeExporter 
     interval: 1m
+
     rules:
       - uid: alert_hdd_usage_warn_uid
         title: HDD Usage Warning (>80%)
@@ -31,7 +32,7 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid 
             model:
-              expr: "((node_filesystem_size_bytes(device!~'rootfs') - node_filesystem_avail_bytes(device!~'rootfs')) / node_filesystem_size_bytes(device!~'rootfs')) * 100 > 80"
+              expr: "((node_filesystem_size_bytes{device!~'rootfs'} - node_filesystem_avail_bytes{device!~'rootfs'}) / node_filesystem_size_bytes{device!~'rootfs'}) * 100 > 80"
               intervalMs: 1000 
               maxbataPoints: 43200 
               refId: A
@@ -60,7 +61,7 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid 
             model:
-              expr: "((node_filesystem_size_bytes(device!~'rootfs') - node_filesystem_avail_bytes(device!~'rootfs')) / node_filesystem_size_bytes(device!~'rootfs')) * 100 > 95"
+              expr: "((node_filesystem_size_bytes{device!~'rootfs'} - node_filesystem_avail_bytes{device!~'rootfs'}) / node_filesystem_size_bytes{device!~'rootfs'}) * 100 > 80"
               intervalMs: 1000 
               maxbataPoints: 43200 
               refId: A
@@ -89,7 +90,7 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid 
             model:
-              expr: "100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m])) * 100 > 70"
+              expr: "100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m]))) * 100 > 70"
               intervalMs: 10000
               maxDataPoints: 43200
               refId: "A"
@@ -118,7 +119,7 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid 
             model:
-              expr: "100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m])) * 100 > 85"
+              expr: "100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m]))) * 100 > 85"
               intervalMs: 10000
               maxDataPoints: 43200
               refId: "A"
