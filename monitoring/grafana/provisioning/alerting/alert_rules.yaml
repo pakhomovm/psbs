@@ -31,7 +31,7 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid 
             model:
-              expr: ((node_filesystem_size_bytes(device!~"rootfs") - node_filesystem_avail_bytes(device!~"rootfs")) / node_filesystem_size_bytes(device!~"rootfs")) * 100 > 80
+              expr: "((node_filesystem_size_bytes(device!~'rootfs') - node_filesystem_avail_bytes(device!~'rootfs')) / node_filesystem_size_bytes(device!~'rootfs')) * 100 > 80"
               intervalMs: 1000 
               maxbataPoints: 43200 
               refId: A
@@ -60,7 +60,7 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid 
             model:
-              expr: ((node_filesystem_size_bytes(device!~"rootfs") - node_filesystem_avail_bytes(device!~"rootfs")) / node_filesystem_size_bytes(device!~"rootfs")) * 100 > 95
+              expr: "((node_filesystem_size_bytes(device!~'rootfs') - node_filesystem_avail_bytes(device!~'rootfs')) / node_filesystem_size_bytes(device!~'rootfs')) * 100 > 95"
               intervalMs: 1000 
               maxbataPoints: 43200 
               refId: A
