@@ -16,14 +16,12 @@ groups:
         annotations:
           summary: "High HDD usage detected (warning)"
           description: "HDD usage is above 80% for 5 minutes"
-          dashboardUid: dashboard_node_exporter_uid
-          panelId: "152"
+          ____dashboardUid____: dashboard_node_exporter_uid
+          ____panelId____: "152"
         labels:
           severity: "warning"
           team: "admins"
         isPaused: false
-#        notification_settings:
-#          receiver: Default PSBS alerting email
         data:
           - refId: A
             relativeTimeRange:
@@ -31,7 +29,13 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid 
             model:
-              expr: "((node_filesystem_size_bytes{device!~'rootfs'} - node_filesystem_avail_bytes{device!~'rootfs'}) / node_filesystem_size_bytes{device!~'rootfs'}) * 100 > 80"
+              expr: >
+                "max by (device, mountpoint) (
+                  (
+                    (node_filesystem_size_bytes{device!~'rootfs'} - node_filesystem_avail_bytes{device!~'rootfs'}) 
+                    / node_filesystem_size_bytes{device!~'rootfs'}
+                  ) * 100 > 80
+                )"
               intervalMs: 10000
               maxDataPoints: 43200 
               refId: A
@@ -45,14 +49,12 @@ groups:
         annotations:
           summary: "High HDD usage detected (critical)"
           description: "HDD usage is above 95% for 5 minutes"
-          dashboardUid: dashboard_node_exporter_uid
-          panelId: "152"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "152"
         labels:
           severity: "critical"
           team: "admins"
         isPaused: false
-#        notification_settings:
-#          receiver: Default PSBS alerting email
         data:
           - refId: A
             relativeTimeRange:
@@ -60,8 +62,13 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid 
             model:
-              expr: "((node_filesystem_size_bytes{device!~'rootfs'} - node_filesystem_avail_bytes{device!~'rootfs'}) / node_filesystem_size_bytes{device!~'rootfs'}) * 100 > 80"
-              intervalMs: 10000
+              expr: >
+                "max by (device, mountpoint) (
+                  (
+                    (node_filesystem_size_bytes{device!~'rootfs'} - node_filesystem_avail_bytes{device!~'rootfs'}) 
+                    / node_filesystem_size_bytes{device!~'rootfs'}
+                  ) * 100 > 80
+                )"              intervalMs: 10000
               maxDataPoints: 43200 
               refId: A
 
@@ -74,14 +81,12 @@ groups:
         annotations:
           summary: "High CPU usage detected (warning)"
           description: "CPU usage is above 70% for 5 minutes"
-          dashboardUid: dashboard_node_exporter_uid
-          panelId: "77"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "77"
         labels:
           severity: "warning"
           team: "admins"
         isPaused: false
-#        notification_settings:
-#          receiver: Default PSBS alerting email
         data:
           - refId: A
             relativeTimeRange:
@@ -103,14 +108,12 @@ groups:
         annotations:
           summary: "High CPU usage detected (critical)"
           description: "CPU usage is above 85% for 5 minutes"
-          dashboardUid: dashboard_node_exporter_uid
-          panelId: "77"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "77"
         labels:
           severity: "critical"
           team: "admins"
         isPaused: false
-#        notification_settings:
-#          receiver: Default PSBS alerting email
         data:
           - refId: A
             relativeTimeRange:
@@ -132,14 +135,12 @@ groups:
         annotations:
           summary: "High RAM usage detected (warning)"
           description: "RAM usage is above 80% for 5 minutes"
-          dashboardUid: dashboard_node_exporter_uid
-          panelId: "78"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "78"
         labels:
           severity: "warning"
           team: "admins"
         isPaused: false
-#        notification_settings:
-#          receiver: Default PSBS alerting email
         data:
           - refId: "A"
             relativeTimeRange:
@@ -161,14 +162,12 @@ groups:
         annotations:
           summary: "High RAM usage detected (critical)"
           description: "RAM usage is above 95% for 5 minutes"
-          dashboardUid: dashboard_node_exporter_uid
-          panelId: "78"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "78"
         labels:
           severity: "critical"
           team: "admins"
         isPaused: false
-#        notification_settings:
-#          receiver: Default PSBS alerting email
         data:
           - refId: "A"
             relativeTimeRange:
