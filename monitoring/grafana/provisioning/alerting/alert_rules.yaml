@@ -10,14 +10,14 @@ groups:
       - uid: alert_hdd_usage_warn_uid
         title: HDD Usage Warning (>80%)
         condition: A
-        noDataState: NoData
+        noDataState: OK
         execErrState: Error
         for: 5m
         annotations:
           summary: "High HDD usage detected (warning)"
           description: "HDD usage is above 80% for 5 minutes"
-          ____dashboardUid____: dashboard_node_exporter_uid
-          ____panelId____: "152"
+          __dashboardUid__: dashboard_node_exporter_uid
+          __panelId__: "152"
         labels:
           severity: "warning"
           team: "admins"
@@ -47,7 +47,7 @@ groups:
       - uid: alert_hdd_usage_crit_uid
         title: HDD Usage Critical (>95%)
         condition: A
-        noDataState: NoData
+        noDataState: OK
         execErrState: Error
         for: 5m
         annotations:
@@ -84,8 +84,8 @@ groups:
       - uid: alert_cpu_usage_warn_uid
         title: CPU Usage Warning (>70%)
         condition: "A"
-        no_data_state: "NoData"
-        exec_err_state: "Alerting"
+        noDataState: OK
+        execErrState: Error
         for: "5m"
         annotations:
           summary: "High CPU usage detected (warning)"
@@ -119,8 +119,8 @@ groups:
       - uid: alert_cpu_usage_crit_uid
         title: CPU Usage Critical (>85%)
         condition: "A"
-        no_data_state: "NoData"
-        exec_err_state: "Alerting"
+        noDataState: OK
+        execErrState: Error
         for: "5m"
         annotations:
           summary: "High CPU usage detected (critical)"
@@ -154,8 +154,8 @@ groups:
       - uid: alert_ram_usage_warn_uid
         title: RAM Usage Warning (>80%)
         condition: "A"
-        no_data_state: "NoData"
-        exec_err_state: "Alerting"
+        noDataState: OK
+        execErrState: Error
         for: "5m"
         annotations:
           summary: "High RAM usage detected (warning)"
@@ -194,8 +194,8 @@ groups:
       - uid: alert_ram_usage_crit_uid
         title: RAM Usage Critical (>95%)
         condition: "A"
-        no_data_state: "NoData"
-        exec_err_state: "Alerting"
+        noDataState: OK
+        execErrState: Error
         for: "5m"
         annotations:
           summary: "High RAM usage detected (critical)"
