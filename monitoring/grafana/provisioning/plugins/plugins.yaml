@@ -8,15 +8,6 @@ apps:
     disabled: false
 # https://grafana.com/docs/plugins/alexanderzobnin-zabbix-app/latest/configuration/provisioning/
 
-
-#  # Плагин типа "panel" (Statusmap)
-#  - type: panel
-#    name: flant-statusmap-panel
-#    version: "0.5.1"
-#    url: "file:///etc/grafana/provisioning/plugins/src/flant-statusmap-panel-0.5.1.zip"
-#
-#  # Плагин типа "panel" (Vonage Status)
-#  - type: panel
-#    name: vonage-status-panel
-#    version: "2.0.4"
-#    url: "file:///etc/grafana/provisioning/plugins/src/vonage-status-panel-2.0.4.zip"
+  - type: vonage-status-panel
+    org_id: 1
+    disabled: false
