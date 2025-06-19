@@ -30,12 +30,12 @@ groups:
             datasourceUid: datasource_prometheus_uid 
             model:
               expr: >
-                "max by (device, mountpoint) (
+                max by (device, mountpoint) (
                   (
                     (node_filesystem_size_bytes{device!~'rootfs'} - node_filesystem_avail_bytes{device!~'rootfs'}) 
                     / node_filesystem_size_bytes{device!~'rootfs'}
                   ) * 100 > 80
-                )"
+                )
               intervalMs: 10000
               maxDataPoints: 43200 
               refId: A
@@ -63,12 +63,13 @@ groups:
             datasourceUid: datasource_prometheus_uid 
             model:
               expr: >
-                "max by (device, mountpoint) (
+                max by (device, mountpoint) (
                   (
                     (node_filesystem_size_bytes{device!~'rootfs'} - node_filesystem_avail_bytes{device!~'rootfs'}) 
                     / node_filesystem_size_bytes{device!~'rootfs'}
-                  ) * 100 > 80
-                )"              intervalMs: 10000
+                  ) * 100 > 95
+                )              
+              intervalMs: 10000
               maxDataPoints: 43200 
               refId: A
 
@@ -94,7 +95,8 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid 
             model:
-              expr: "100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m]))) * 100 > 70"
+              expr: >
+                100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m]))) * 100 > 70
               intervalMs: 10000
               maxDataPoints: 43200
               refId: "A"
@@ -121,7 +123,8 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid 
             model:
-              expr: "100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m]))) * 100 > 85"
+              expr: >
+                100 - (avg by(instance) (irate(node_cpu_seconds_total{mode='idle'}[5m]))) * 100 > 85
               intervalMs: 10000
               maxDataPoints: 43200
               refId: "A"
@@ -148,7 +151,13 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid
             model:
-              expr: "(node_memory_MemTotal_bytes - node_memory_MemFree_bytes - node_memory_Buffers_bytes - node_memory_Cached_bytes) / node_memory_MemTotal_bytes * 100 > 80"
+              expr: >
+                (
+                  node_memory_MemTotal_bytes 
+                  - node_memory_MemFree_bytes 
+                  - node_memory_Buffers_bytes 
+                  - node_memory_Cached_bytes
+                ) / node_memory_MemTotal_bytes * 100 > 80
               intervalMs: 10000
               maxDataPoints: 43200
               refId: "A"
@@ -175,7 +184,13 @@ groups:
               to: 0
             datasourceUid: datasource_prometheus_uid
             model:
-              expr: "(node_memory_MemTotal_bytes - node_memory_MemFree_bytes - node_memory_Buffers_bytes - node_memory_Cached_bytes) / node_memory_MemTotal_bytes * 100 > 95"
+              expr: >
+                (
+                  node_memory_MemTotal_bytes 
+                  - node_memory_MemFree_bytes 
+                  - node_memory_Buffers_bytes 
+                  - node_memory_Cached_bytes
+                ) / node_memory_MemTotal_bytes * 100 > 95
               intervalMs: 10000
               maxDataPoints: 43200
               refId: "A"
