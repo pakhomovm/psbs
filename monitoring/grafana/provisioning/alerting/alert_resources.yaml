@@ -20,7 +20,7 @@ muteTimes:
     - orgId: 1
       name: "Default mute times (no_weekends)"
       time_intervals:
-        - weekdays: ["saturday", "sunday"]
+        - weekdays: ['saturday', 'sunday']
           location: "Europe/Moscow"
 #    - orgId: 1
 #      name: "Business hours"
@@ -38,13 +38,17 @@ policies:
       group_by: [grafana_folder, alertname]      # Группировка алертов
       group_wait: 30s        # Ожидание перед отправкой группы
       group_interval: 5m     # Интервал между уведомлениями группы
-      repeat_interval: 4h    # Интервал повторения для неустраненных алертов
-      matchers:
-        - severity =~ "critical|warning"
-        - team = "admins"
-      mute_time_intervals: 
-        - "Default mute times (no_weekends)"
-#      continue: true           # Продолжить проверку следующих политик
+      repeat_interval: 2h    # Интервал повторения для неустраненных алертов
+      routes:
+        - receiver: "Default PSBS alerting email" 
+          matchers:
+            - severity =~ "critical|warning"
+            - team = "admins"
+          mute_time_intervals: 
+            - "Default mute times (no_weekends)"
+          object_matchers:
+            - ['severity', '=~', 'warning|critical']
+          continue: true           # Продолжить проверку следующих политик
 
 
 #templates:
