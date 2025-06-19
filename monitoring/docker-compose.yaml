@@ -25,9 +25,9 @@ services:
     depends_on:
       - prometheus
     volumes:
-      - ./grafana/lib:/var/lib/grafana  # Volume для хранения данных Grafana
-      - ./grafana/provisioning:/etc/grafana/provisioning
-#      - ./grafana/provisioning/plugins/src/:/var/lib/grafana/plugins/
+      - ./grafana/lib:/var/lib/grafana                    # Volume для хранения данных Grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning. # Volume для provisioned конфигураций
+      - ./grafana/plugins:/var/lib/grafana/plugins.       # Volume для папок с плагинами
     environment:
       - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
       - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS="alexanderzobnin-zabbix-app"

@@ -1,11 +1,13 @@
+#https://grafana.com/docs/grafana/latest/administration/provisioning/#example-plugin-configuration-file
+
 apiVersion: 1
 
 apps:
-  # Плагин типа "app" (Zabbix)
-  - type: app
-    name: alexanderzobnin-zabbix-app
-    version: "5.1.0"
-    url: "file:///etc/grafana/provisioning/plugins/src/alexanderzobnin-zabbix-app-5.1.0.linux_amd64.zip"
+  - type: alexanderzobnin-zabbix-app
+    org_id: 1
+    disabled: false
+# https://grafana.com/docs/plugins/alexanderzobnin-zabbix-app/latest/configuration/provisioning/
+
 
 #  # Плагин типа "panel" (Statusmap)
 #  - type: panel

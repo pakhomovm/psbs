@@ -2,7 +2,7 @@ apiVersion: 1
 
 groups:
   - orgId: 1
-    folder: NodeExporter
+    folder: Infra
     name: group_1m
     interval: 1m
 
