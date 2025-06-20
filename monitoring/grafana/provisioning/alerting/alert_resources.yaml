@@ -9,8 +9,8 @@ contactPoints:
           disableResolveMessage: false
           settings:
             addresses: |-
-              lysikovaev@psbins.ru
-              atkachenko@psbii.ru
+              a@company.ru
+              b@company.ru
             singleEmail: false
 #            message: '{{ template "custom_email.message" .}}'
 #            subject: '{{ template "custom_email.subject" .}}'
