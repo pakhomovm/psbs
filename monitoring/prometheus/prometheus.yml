@@ -17,3 +17,38 @@ scrape_configs:
           - '192.168.40.173:9100'
         labels:
           env: 'test'
+
+  - job_name: 'blackbox_http_2xx'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]  # Look for a HTTP 200 response.
+    static_configs:
+      - targets:
+        - https://ya.ru    # Target to probe with http.
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: localhost:9115  # The blackbox exporter's real hostname:port.
+
+  - job_name: 'blackbox_dns'
+    metrics_path: /probe
+    params:
+      module: [dns_udp] 
+    static_configs:
+      - targets:
+          - '8.8.8.8?query_name=ya.ru&query_type=A'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: localhost:9115  # The blackbox exporter's real hostname:port.
+
+
+  - job_name: 'blackbox_exporter_self'  # collect blackbox exporter's operational metrics.
+    static_configs:
+      - targets: ['localhost:9115']

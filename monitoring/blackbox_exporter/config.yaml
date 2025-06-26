@@ -1,0 +1,36 @@
+modules:
+
+  icmp:
+    prober: icmp
+    timeout: 5s
+    icmp:
+      preferred_ip_protocol: "ip4"
+
+  http_2xx:
+    prober: http
+    http:
+      preferred_ip_protocol: "ip4"
+
+  dns_udp:
+    prober: dns
+    timeout: 5s
+    dns:
+#      query_name: "ya.ru"
+#      query_type: "A"
+      transport_protocol: "udp"
+      preferred_ip_protocol: "ip4" 
+      valid_rcodes:
+        - NOERROR
+      validate_answer_rrs:
+        fail_if_matches_regexp:
+          - ".*127.0.0.1"
+        fail_if_all_match_regexp:
+          - ".*127.0.0.1"
+        fail_if_none_matches_regexp:
+          - "127.0.0.1"
+      validate_authority_rrs:
+        fail_if_matches_regexp:
+          - ".*127.0.0.1"
+      validate_additional_rrs:
+        fail_if_matches_regexp:
+          - ".*127.0.0.1"

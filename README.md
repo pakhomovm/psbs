@@ -62,3 +62,19 @@ systemctl daemon-reload && systemctl start node_exporter && systemctl enable nod
 ```bash
 curl http://localhost:9100/metrics
 ```
+
+
+# Blackbox Exporter
+
+### Links
+* https://github.com/prometheus/blackbox_exporter
+* https://github.com/prometheus/blackbox_exporter/blob/master/blackbox.yml
+* https://github.com/prometheus/blackbox_exporter/blob/master/example.yml
+
+
+# DNS Exporter
+
+### Links
+* https://www.youtube.com/watch?v=RbzVNJqt8-4
+* https://github.com/tykling/dns_exporter
+
