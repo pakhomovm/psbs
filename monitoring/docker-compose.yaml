@@ -51,7 +51,7 @@ services:
     ports:
       - 9115:9115
     volumes:
-      - ./blackbox_exporter/config.yml:/etc/blackbox_exporter/config.yaml
+      - ./blackbox_exporter/config.yaml:/etc/blackbox_exporter/config.yaml
     command:
       - '--config.file=/etc/blackbox_exporter/config.yaml'
 
