@@ -90,8 +90,6 @@ docker-compose version
 
 Node Exporter is a Prometheus exporter for hardware and OS metrics. Here's how to install it on a Linux server:
 
-## Method 1: Downloading Precompiled Binary
-
 ### 1. Download Node Exporter
 ```bash
 wget https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-amd64.tar.gz
@@ -99,12 +97,12 @@ wget https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_e
 
 ### 2. Extract the Archive
 ```bash
-tar xvf node_exporter-*.linux-amd64.tar.gz
+tar -xvf node_exporter-*.tar.gz
 ```
 
 ### 3. Move the Binary
 ```bash
-mv node_exporter-*.linux-amd64/node_exporter /usr/local/bin/
+cp node_exporter-*/node_exporter /usr/local/bin/
 ```
 
 ### 4. Create a System User
@@ -114,7 +112,8 @@ useradd -rs /bin/false node_exporter
 
 ### 5. Create a Systemd Service File
 ```bash
-touch /etc/systemd/system/node_exporter.service && vi /etc/systemd/system/node_exporter.service 
+touch /etc/systemd/system/node_exporter.service
+vi /etc/systemd/system/node_exporter.service 
 ```
 
 Add this content:
@@ -144,6 +143,7 @@ systemctl daemon-reload && systemctl start node_exporter && systemctl enable nod
 
 ### 7. Check
 ```bash
+systemctl status node_exporter
 curl http://localhost:9100/metrics
 ```
 
@@ -157,6 +157,70 @@ curl http://localhost:9100/metrics
 * https://github.com/prometheus/blackbox_exporter
 * https://github.com/prometheus/blackbox_exporter/blob/master/blackbox.yml
 * https://github.com/prometheus/blackbox_exporter/blob/master/example.yml
+
+
+# Установка Blackbox Exporter
+
+### 1. Скачать архив 
+```bash
+wget https://github.com/prometheus/blackbox_exporter/releases/download/v0.27.0/blackbox_exporter-0.27.0.linux-amd64.tar.gz
+```
+
+### 2. Распаковать архив
+```bash
+tar -xvf blackbox_exporter-*.tar.gz
+```
+
+### 3. Перенести бинарный файл
+```bash
+cp blackbox_exporter-*/blackbox_exporter /usr/local/bin/
+```
+
+### 3. Создать директорию для конфига
+```bash
+mkdir -p /etc/blackbox_exporter
+cp config.yaml /etc/blackbox_exporter/config.yaml
+```
+
+### 4. Создать пользователя и выдать ему права на бинарный файл и каталог с конфигом
+```bash
+useradd -rs /bin/false blackbox_exporter
+chown -R blackbox_exporter:blackbox_exporter /etc/blackbox_exporter
+chown blackbox_exporter:blackbox_exporter /usr/local/bin/blackbox_exporter
+```
+
+### 5. Создать файл службы
+```bash
+touch /etc/systemd/system/blackbox_exporter.service
+vi /etc/systemd/system/blackbox_exporter.service 
+```
+
+### 5. Вставить следующее
+```bash
+[Unit]
+Description=Blackbox Exporter
+After=network.target
+
+[Service]
+User=blackbox_exporter
+Group=blackbox_exporter
+Type=simple
+ExecStart=/usr/local/bin/blackbox_exporter --config.file=/etc/blackbox_exporter/config.yaml --web.listen-address=:9115
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### 6. Start and Enable the Service
+```bash
+systemctl daemon-reload && systemctl start blackbox_exporter && systemctl enable blackbox_exporter
+```
+
+### 7. Check
+```bash
+systemctl status blackbox_exporter
+curl http://localhost:9115/probe?target=example.com&module=http_2xx
+```
 
 
 # ==================================================================
