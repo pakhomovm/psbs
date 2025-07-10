@@ -1,0 +1,12 @@
+<service>
+  <id>ConnectorITDMS</id>
+  <name>Connector IT DMS</name>
+  <description>Custom service for Connector IT DMS</description>
+  <executable>C:\Java\openjdk-17.0.2_windows-x64_bin\jdk-17.0.2\bin\java.exe</executable>
+  <arguments>-jar "C:\ConnectorITDMS\ConnectorITDMS-0.0.1.jar"</arguments>
+  <logpath>C:\ConnectorITDMS\logs</logpath>
+  <log mode="roll-by-size">
+    <sizeThreshold>10240</sizeThreshold>
+    <keepFiles>8</keepFiles>
+  </log>
+</service>
