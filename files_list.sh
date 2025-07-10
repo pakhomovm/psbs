@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPO_PATH="."
-REPO_URL="https://raw.githubusercontent.com/pakhomovm/psbs/refs/heads/master/monitoring"
+REPO_URL="https://raw.githubusercontent.com/pakhomovm/psbs/refs/heads/master"
 OUTPUT_FILE="files_download.sh"
 THIS_FILE="$(basename "$0")"
 
@@ -16,7 +16,7 @@ process_file() {
     # Формируем URL 
     local url="$REPO_URL/$relative_path"
     # Записываем команду wget в файл
-    echo "wget '$url'" >> "$OUTPUT_FILE"
+    echo "curl -o '$url'" >> "$OUTPUT_FILE"
 }
 
 # Рекурсивно обходим все файлы в репозитории (исключая .git)
