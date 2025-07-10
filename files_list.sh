@@ -16,7 +16,7 @@ process_file() {
     # Формируем URL 
     local url="$REPO_URL/$relative_path"
     # Записываем команду wget в файл
-    echo "curl -o '$url'" >> "$OUTPUT_FILE"
+    echo "curl -O '$url'" >> "$OUTPUT_FILE"
 }
 
 # Рекурсивно обходим все файлы в репозитории (исключая .git)
