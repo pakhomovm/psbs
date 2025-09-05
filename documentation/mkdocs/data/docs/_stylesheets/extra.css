@@ -1,0 +1,10 @@
+[data-md-color-scheme="custom_light"] {
+  --md-primary-fg-color:        #3b51bb;
+  --md-primary-fg-color--light: #5367c4;
+  --md-primary-fg-color--dark:  #2c3c8b;
+}
+[data-md-color-scheme="custom_dark"] {
+  --md-primary-fg-color:        #3b51bb;
+  --md-primary-fg-color--light: #5367c4;
+  --md-primary-fg-color--dark:  #2c3c8b;
+}

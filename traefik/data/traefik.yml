@@ -1,0 +1,42 @@
+api:
+  insecure: true            # Dashboard will be published on 8080 (by default) and URL http://<Traefik IP>:8080/dashboard/
+  dashboard: true
+#  basePath: /traefik       # Custom base path: API on `/traefik/api` and Dashboard on `/traefik/dashboard`
+#  debug: true              # Debug mode
+
+entryPoints:
+  http:
+    address: ":80"
+#    redirections:
+#      entryPoint:
+#        to: "https"
+#        scheme: "https"
+  https:
+    address: ":443"
+#  dashboard:
+#    address: ":8080"
+#  metrics:
+#    address: ":8081"
+
+metrics:
+  prometheus:
+    entryPoint: http
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false       # Discovers containers only with label="traefik.enable=true"
+  file:
+    filename: /dynamic.yml
+    watch: true
+
+#certificatesResolvers:
+#  letsEncrypt:
+#    acme:
+#      email: postmaster@example.com
+#      storage: acme.json
+#      #caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+#      httpChallenge:
+#        entryPoint: http
+
+

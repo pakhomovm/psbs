@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  mkdocs:
+    image: squidfunk/mkdocs-material:9.6
+    container_name: mkdocs
+    ports:
+      - 8000:8000
+    volumes:
+      - ./data:/docs
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mkdocs.rule=Host(`mkdocs.home.local`)"
+      - "traefik.http.routers.mkdocs.entrypoints=http"
+      - "traefik.http.services.mkdocs.loadbalancer.server.port=8000"
+    networks:
+      - traefik-net
+
+#networks:
+#  traefik-net:
+#    external: true

@@ -1,0 +1,34 @@
+http:
+  routers:
+    dashboard:
+      rule: "Host(`traefik.home.local`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      service: api@internal
+      entryPoints:
+        - http
+    prometheus:
+      rule: "Host(`traefik.home.local`) && Path(`/metrics`)"
+      service: prometheus@internal
+      entryPoints:
+        - http
+#      middlewares:
+#        - redirect-plex
+#    http-catchall:
+#      rule: hostregexp(`{host:.+}`)
+#      entrypoints:
+#      - http
+#      middlewares:
+#      - redirect-to-https
+
+
+#  middlewares:
+#    redirect-to-https:
+#      redirectScheme:
+#        scheme: https
+#        permanent: false
+
+  services:
+    fake-service:
+      loadBalancer:
+        servers:
+          - url: "http://localhost"
+ 

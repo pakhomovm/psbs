@@ -1,0 +1,100 @@
+site_name: Библиотека технической документации
+#site_url: https://elib.home.local
+#repo_url: https://git.local/repo
+copyright: © 2025, ООО «ПСБ Страхование»
+
+theme:
+  name: material
+  language: ru
+  logo: _img/logo.png
+  favicon: _img/logo_small.png
+  font:
+    text: Inter
+    code: Source Code Pro
+  features:
+    - content.code.copy
+    - navigation.tracking
+    - navigation.path
+    - navigation.top
+    - search.highlight
+
+#  palette:
+#    primary: indigo
+#    accent: indigo
+
+  palette:
+
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+theme:
+  palette:
+    scheme: youtube
+
+extra_css:
+  - _stylesheets/extra.css
+
+nav:
+  - Главная: index.md
+  - Быстрый старт: getting-started.md
+    - Инструкции:
+      - Docker/docker.md
+      - Docker/docker-compose.md
+    - Мониторинг:
+      - Monitoring/node-exporter.md
+      - Monitoring/blackbox-exporter.md
+      - Monitoring/windows-exporter.md
+    - Прочее:
+      - Other/winsw.md
+    - Схемы: 
+      - Schemas/example.md
+
+
+nav:
+  - Главная: index.md
+  - Инструкции:
+    - Docker: 
+      - Docker/docker.md
+      - Docker/docker-compose.md
+    - Мониторинг:
+      - Monitoring/node-exporter.md
+      - Monitoring/blackbox-exporter.md
+      - Monitoring/windows-exporter.md
+    - Прочее:
+      - Other/winsw.md
+    - Схемы: 
+      - Schemas/example.md
+
+plugins:
+  - search
+  - tags
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+
+#  - admonition
+#  - codehilite
+#  - toc:
+#      permalink: true
+#  - footnotes
+#  - tables
+#  - attr_list
+#  - pymdownx.superfences
+
+
