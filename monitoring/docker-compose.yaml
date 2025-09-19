@@ -15,6 +15,16 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention.time=31d'
     user: root
+    extra_hosts:
+      - "wwwdms-test-fe01:192.168.40.169"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.rule=Host(`prometheus.home.local`)"
+      - "traefik.http.routers.prometheus.entrypoints=http"
+      - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
+    networks:
+      - traefik-net
+
 
   grafana:
     image: grafana/grafana:12.0.2
@@ -38,27 +48,16 @@ services:
 #      - GF_AUTH_ANONYMOUS_ENABLED=true
 #      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
     ports:
-      - 8582:3000
+      - 3000:3000
     user: root
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.home.local`)"
+      - "traefik.http.routers.grafana.entrypoints=http"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+    networks:
+      - traefik-net
 
-
-  blackbox-exporter:
-    image: prom/blackbox-exporter:v0.26.0
-    container_name: blackbox-exporter
-    restart: unless-stopped
-    depends_on:
-      - prometheus
-    ports:
-      - 9115:9115
-    volumes:
-      - ./blackbox_exporter/config.yaml:/etc/blackbox_exporter/config.yaml
-    command:
-      - '--config.file=/etc/blackbox_exporter/config.yaml'
-
-
-#  dns_exporter:
-#    image: tykling/dns_exporter:latest
-#    ports:
-#      - 15353:15353
-#    volumes:
-#      - ./dns_exporter.yml:/home/nonroot/dns_exporter.yml
+networks:
+  traefik-net:
+    external: true

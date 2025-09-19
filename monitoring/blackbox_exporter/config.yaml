@@ -12,26 +12,24 @@ modules:
     http:
       preferred_ip_protocol: "ip4"
 
-  dns:
+  dns_smsc:
     prober: dns
     timeout: 10s
     dns:
-      query_name: "ya.ru"
+      query_name: "smsc.ru"
       query_type: "A"
       transport_protocol: "udp"
       preferred_ip_protocol: "ip4" 
       valid_rcodes:
         - NOERROR
-#      validate_answer_rrs:
-#        fail_if_matches_regexp:
-#          - ".*127.0.0.1"
-#        fail_if_all_match_regexp:
-#          - ".*127.0.0.1"
-#        fail_if_none_matches_regexp:
-#          - "127.0.0.1"
-#      validate_authority_rrs:
-#        fail_if_matches_regexp:
-#          - ".*127.0.0.1"
-#      validate_additional_rrs:
-#        fail_if_matches_regexp:
-#          - ".*127.0.0.1"
+
+  dns_dadata:
+    prober: dns
+    timeout: 10s
+    dns:
+      query_name: "dadata.ru"
+      query_type: "A"
+      transport_protocol: "udp"
+      preferred_ip_protocol: "ip4" 
+      valid_rcodes:
+        - NOERROR

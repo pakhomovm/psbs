@@ -1,3 +1,49 @@
+
+Вопросы: 
+1. wwwdms-****-fe01. Подключение к БД BitrixCMS. Где и как это описывать?
+/var/www/html/psbins.ru/bitrix/.settings.php:
+  'connetions' =>
+  array (
+    'value' =>
+    array (
+      'default' =>
+      array (
+        'className' => '\\Bitrix\\Main\\DB\\MysqliConnection',
+        'host' => 'localhost',
+        'database' => 'dbpsbins',
+        'login' => 'lkpsbins',
+        'password' => '*******',
+        'options' => 2,
+      ),
+    ),
+    'readonly' => true,
+  ),
+
+
+2. информация по платёжному шлюзу внутри b2b. доступы к платёжному шлюзу берутся из этого запроса в 1С, 
+"getPaymentInfo" => array(
+        "method" => "getPaymentInfo",
+        "scheme" => "SMP_Payment",
+        "parameters" => array("DocId"=>true,"Type"=>true,"Product"=>true,"Full"=>true),
+        "cache" => "0",
+        "errorcode"=>"2|3",
+        "postwork"=> true
+),
+
+
+@PakhomovMikhail 
+Исходный код мобильного приложения выложили на терминалку, там же в папке лежит документация по развертыванию файл README.md
+на терминалке
+/nmt/obmen/
+
+я скидывал папку с названием psps, под каким названием туда положили неизвестно)
+
+
+
+
+
+
+
 # MkDocs
 
 ## Examples

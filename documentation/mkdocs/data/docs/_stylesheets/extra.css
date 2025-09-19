@@ -1,3 +1,55 @@
+.md-sidebar--primary {
+  margin-left: 100px;
+}
+
+.md-sidebar--secondary {
+  margin-right: 100px;
+}
+
+@media screen and (max-width:768px) {
+  .md-sidebar--primary {
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .md-sidebar--secondary {
+    margin-right: 0px;
+  }
+}
+
+.md-main__inner.md-grid {
+  max-width: initial;
+}
+
+.md-typeset {
+  font-size: 0.7rem;
+  line-height: 1.1rem;
+}
+
+.md-nav  {
+  font-size: 0.575rem;
+  line-height: 1.25;
+}
+
+.md-ellipsis {
+  margin-top: 8px;
+}
+
+/*
+.md-typeset h2 {
+  font-size: 1.55rem;
+}
+
+.md-typeset h3 {
+  font-size: 1.4rem;
+}
+
+.md-typeset h4 {
+  font-size: 1.25rem;
+}
+*/
+
 [data-md-color-scheme="custom_light"] {
   --md-primary-fg-color:        #3b51bb;
   --md-primary-fg-color--light: #5367c4;

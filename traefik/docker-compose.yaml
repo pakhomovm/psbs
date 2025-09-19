@@ -5,24 +5,18 @@ services:
     image: traefik:v2.11
     container_name: traefik
     restart: unless-stopped
-#    command:
-#      - "--configFile=/etc/traefik/traefik.yml"
     ports:
       - 80:80
-      - 8080:8080   # /dashboard
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./data/traefik.yml:/traefik.yml:ro
       - ./data/dynamic.yml:/dynamic.yml:ro
-#      - ./data/traefik.yml:/etc/traefik/traefik.yml"
-#      - ./data/custom/:/custom/:ro
-#      - ./data/acme.json:/acme.json
     labels:
       - "traefik.enable=true"
     networks:
       - traefik-net
 
-#networks:
-#  traefik-net:
-#    external: true
+networks:
+  traefik-net:
+    external: true
